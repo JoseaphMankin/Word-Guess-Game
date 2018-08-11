@@ -1,0 +1,14 @@
+body{
+    background-color: black;
+    color: red;
+    text-align: center;
+}
+
+#puzzleDiv{
+    background-color: red;
+    color: black;
+    border: 3px solid white;
+    height: 200px;
+    padding: 10px;
+    font-size: 24 pt;
+}
