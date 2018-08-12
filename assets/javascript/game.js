@@ -1,3 +1,11 @@
+// Player chooses a letter (from keyboard, but possibly from clicking buttons)
+
+document.onkeyup = function() {
+    var userGuess = String.fromCharCode(event.keyCode).toUpperCase();
+    
+    console.log(userGuess);
+}
+
 // Player Instructions on how to begin. Wins start at zero. Guesses start at 8
 let wins = 0;
 let guesses = 8;
@@ -18,9 +26,13 @@ console.log=(display);
 let win = wordLength;
 let letters = randChoice.split('')
 
-let attemptsLeft = 8
 let output="";
 let userLetter="";
+
+
+
+
+// Setup of parameters on initial load
 
 let setup = function(){
     for (let i=0; i < randChoice.length; i++){
@@ -29,6 +41,10 @@ let setup = function(){
     }
     document.getElementById("puzzleDiv").innerHTML = output; 
     output ="";
+
+    document.getElementById("lives").innerHTML = guesses;
+  
+    document.getElementById("wins").innerHTML = wins;
 }
 
 window.onload = function(){
@@ -45,11 +61,8 @@ function start() {
     document.getElementById("wins").innerHTML = wins;
   }
 
-// Player chooses a letter (from keyboard, but possibly from clicking buttons)
 
-document.onkeyup = function() {
-    let userguess = String.fromCharCode(event.keyCode).toUpperCase();
-}
+
 
 
 
