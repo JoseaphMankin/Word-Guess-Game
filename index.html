@@ -12,7 +12,7 @@
     <script src="assets/javascript/game.js"></script>
 </head>
 
-<body>
+<body onload>
     <header>
         <h1>Monster Guess</h1>
     </header>
@@ -38,12 +38,16 @@
             </div>
             <div class="col-8 letters">
                <h4>AVAILABLE LETTERS</h4> <hr>
+               <span id=availLetters></span>
             </div>
 
         </div>
         <br>
         <div>
-            <button type="button" class="btn btn-warning btn-lg btn-block" onclick="start()">Press Button to Start!</button>
+            <button type="button" class="btn btn-warning btn-lg btn-block" onclick="start()">
+                <span id=instructions>
+                    Press Button to Start!
+                </span>
         </div>
 
     </div>
