@@ -12,7 +12,7 @@ let wins = 0;
 
 // Taking the length of the secret word, and pushing placeholder _'s it into the secret array
 for (i = 0; i < word.length; i++) {
-    secret.push("_");
+    secret.push("_ ");
 }
 
 console.log(secret);
@@ -23,13 +23,13 @@ console.log(secret);
 document.onkeyup = function () {
     let userGuess = String.fromCharCode(event.keyCode).toUpperCase();
     console.log(userGuess);
-
+    //removes the key pressed from the available array
     var i = available.indexOf(userGuess);
     if(i != -1) {
         available.splice(i, 1);
     }
     console.log(available);
-    document.getElementById("availLetters").innerHTML = available;
+    document.getElementById("availLetters").innerHTML = available.join(" ");
 
 
     //if the Guessed letter isn't an index of word, remove 1 from the strike pool. If hits Zero, you lose
@@ -50,8 +50,8 @@ document.onkeyup = function () {
             if (word[i] === userGuess) {
                 secret[i] = userGuess;
                 console.log(secret);
-                document.getElementById("puzzleDiv").innerHTML = secret; 
-                if (secret.indexOf("_") <= 0) {
+                document.getElementById("puzzleDiv").innerHTML = secret.join(""); 
+                if (secret.indexOf("_") == 0) {
                     wins++;
                     document.getElementById("wins").innerHTML = wins;
                     console.log("Congratulations on your win!");
@@ -76,7 +76,7 @@ document.onkeyup = function () {
 
 function start() {
 
-    document.getElementById("puzzleDiv").innerHTML = secret; 
+    document.getElementById("puzzleDiv").innerHTML = secret.join("");  
 
     document.getElementById("lives").innerHTML = strikes;
 
@@ -84,7 +84,7 @@ function start() {
 
     document.getElementById("instructions").innerHTML = "Please Select A Letter";
 
-    document.getElementById("availLetters").innerHTML = available;
+    document.getElementById("availLetters").innerHTML = available.join(" ");
   }
 
 
