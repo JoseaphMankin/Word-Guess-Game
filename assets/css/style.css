@@ -4,11 +4,37 @@ body{
     text-align: center;
 }
 
+hr{
+    border-color: red;
+}
+
+div{
+    padding: 3px;
+}
+
 #puzzleDiv{
     background-color: red;
     color: black;
     border: 3px solid white;
     height: 200px;
     padding: 10px;
-    font-size: 24 pt;
+    width: 100%;
+    font-size: 100px;
+}
+
+#dashboard{
+    border: 5px solid green;
+    padding: 0px;
+    margin: 0px;
+}
+
+.innerDiv{
+    border: 2px solid yellow;
+    height: 75px;
+}
+
+.letters{
+    border: 2px solid yellow;
+    height: 150px;
+
 }

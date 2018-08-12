@@ -12,14 +12,39 @@
     <script src="assets/javascript/game.js"></script>
 </head>
 
-<body onload="">
+<body>
     <header>
         <h1>Monster Guess</h1>
     </header>
 
     <div id="puzzleDiv">
-        <button type="button" class="btn btn-warning btn-lg btn-block" onclick="myFunction()">Press Button to Start!</button>
-      
+
+    </div>
+
+    <div id="dashboard">
+        <div class="row">
+            <div class="col-4">
+                <div class="innerDiv">
+                    <h4>GUESSES LEFT:</h4> 
+                    <p id="lives"></p>
+
+                </div>
+                <div class="innerDiv">
+                    <h4>TOTAL WINS:</h4> 
+                    <p id="wins"></p>
+
+                </div>
+
+            </div>
+            <div class="col-8 letters">
+               <h4>AVAILABLE LETTERS</h4> <hr>
+            </div>
+
+        </div>
+        <br>
+        <div>
+            <button type="button" class="btn btn-warning btn-lg btn-block" onclick="start()">Press Button to Start!</button>
+        </div>
 
     </div>
 
