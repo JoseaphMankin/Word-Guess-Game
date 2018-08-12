@@ -19,7 +19,7 @@ div{
     height: 200px;
     padding: 10px;
     width: 100%;
-    font-size: 100px;
+    font-size: 80px;
 }
 
 #dashboard{
@@ -36,5 +36,6 @@ div{
 .letters{
     border: 2px solid yellow;
     height: 150px;
+    font-size: 15pt;
 
 }

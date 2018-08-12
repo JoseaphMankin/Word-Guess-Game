@@ -2,10 +2,13 @@
 let puzzles = ["DRACULA", "MUMMY", "WOLFMAN", "FRANKENSTEIN",];
 let word = puzzles[Math.floor(Math.random() * puzzles.length)];
 
-// An Array to hold the puzzle blanks/letters
+// An Array to hold the puzzle blanks/letters and one to hold all the available guesses
 let secret = [];
-// A varible to count the guesses
+let available =["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+
+// A varible to count the guesses and wins
 let strikes = 8;
+let wins = 0;
 
 // Taking the length of the secret word, and pushing placeholder _'s it into the secret array
 for (i = 0; i < word.length; i++) {
@@ -15,32 +18,44 @@ for (i = 0; i < word.length; i++) {
 console.log(secret);
 
 
-//keyup listener to get letter and convert to uppercase
+//keyup listener to get letter and convert to uppercase for user error
 
 document.onkeyup = function () {
     let userGuess = String.fromCharCode(event.keyCode).toUpperCase();
     console.log(userGuess);
 
-    //if the Guessed letter isn't an index of word, remove from the strike pool
+    var i = available.indexOf(userGuess);
+    if(i != -1) {
+        available.splice(i, 1);
+    }
+    console.log(available);
+    document.getElementById("availLetters").innerHTML = available;
+
+
+    //if the Guessed letter isn't an index of word, remove 1 from the strike pool. If hits Zero, you lose
 
     if (word.indexOf(userGuess) < 0) {
         strikes--;
         console.log("Strike!");
         console.log(strikes);
+        document.getElementById("lives").innerHTML = strikes;
         if (strikes == 0) {
             alert("Sorry, please play again!");
         }
     }
-    // If the letter exists in the word, we need to add it to the good guesses array
+    // If the letter exists in the word, add it to the good guesses array. If no more _ in array, you win.
     else {
         for (i = 0; i < word.length; i++) {
-            // Each time the guess letter is found, we add it as a good guess in the same spot
+            // Each time the guess letter is found, add it as a good guess in the same spot
             if (word[i] === userGuess) {
                 secret[i] = userGuess;
                 console.log(secret);
+                document.getElementById("puzzleDiv").innerHTML = secret; 
                 if (secret.indexOf("_") <= 0) {
-                    alert("Congratulations on your win!");
-                    alert("The secret word was " + word);
+                    wins++;
+                    document.getElementById("wins").innerHTML = wins;
+                    console.log("Congratulations on your win!");
+                  
                 }
 
             }
@@ -57,84 +72,23 @@ document.onkeyup = function () {
 // document.getElementById("puzzleDiv").innerHTML = secret; 
 
 
+//Player presses Start button and puzzle loads and scoreboards are set
 
-// // Defining it as an array anways.
-// let wins = 0;
-// let guesses = 8;
-// let alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P",
-// "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-// let guessedLtrs = [];
+function start() {
 
-// // Computer picks a random word, puts that word in an array. & splits them apart
+    document.getElementById("puzzleDiv").innerHTML = secret; 
 
-// let word =["Dracula", "Mummy", "Wolfman", "Frankenstein",];
-// let randChoice = word[Math.floor(Math.random() * word.length)];
+    document.getElementById("lives").innerHTML = strikes;
 
-//     console.log(randChoice); 
+    document.getElementById("wins").innerHTML = wins;
 
-// let wordLength = randChoice.length;
-// console.log(wordLength);
+    document.getElementById("instructions").innerHTML = "Please Select A Letter";
 
-// let display = [wordLength];
-// console.log=(display);
+    document.getElementById("availLetters").innerHTML = available;
+  }
 
-// let win = wordLength;
-// let letters = randChoice.split('');
-
-// let output = "";
-// let userLetter = "";
-
-// // Player chooses a letter (from keyboard, but possibly from clicking buttons)
-
-
-// document.onkeyup = function() {
-//     let userGuess = String.fromCharCode(event.keyCode).toUpperCase();
-
-//     // console.log(userGuess);
-
-//     if (userGuess == "A"){
-
-//     }
-
-// }
-
-
-// // Setup of parameters on initial load
-
-//     // let setup = function(){
-//     // }
-
-//     // window.onload = function(){
-//     //     setup();
-//     // }
-
-
-// //Player presses Start button and puzzle loads and scoreboards are set
-
-// function start() {
-
-//     for (let i=0; i < randChoice.length; i++){
-//         display[i] = "_ ";
-//         output = output + display[i];
-//     }
-//     document.getElementById("puzzleDiv").innerHTML = output; 
-//     output ="";
-
-//     document.getElementById("lives").innerHTML = guesses;
-
-//     document.getElementById("wins").innerHTML = wins;
-
-//     document.getElementById("instructions").innerHTML = "Please Select A Letter";
-
-//     document.getElementById("availLetters").innerHTML = alphabet;
-//   }
-
-
-// // Player selection either causes puzzle letters to reveal, or causes guesses to increment down
 
 // // Other keys do nothing. Repeat key pushes of the same letter do nothing (don't count as strikes)
-
-// //Win-Loss conditions. If all letters revealed, show a "YOU WIN". Wins bumps by one. If guesses hits Zero, "YOU LOSE"
 
 // //Option to play again, staring over, Resetting Guesses to 8, but leaving wins alone.
 
