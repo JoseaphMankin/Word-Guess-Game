@@ -51,7 +51,7 @@ document.onkeyup = function () {
                 secret[i] = userGuess;
                 console.log(secret);
                 document.getElementById("puzzleDiv").innerHTML = secret.join(""); 
-                if (secret.indexOf("_") == 0) {
+                if (secret.indexOf("_") <= 0) {
                     wins++;
                     document.getElementById("wins").innerHTML = wins;
                     console.log("Congratulations on your win!");
@@ -74,18 +74,22 @@ document.onkeyup = function () {
 
 //Player presses Start button and puzzle loads and scoreboards are set
 
-function start() {
 
-    document.getElementById("puzzleDiv").innerHTML = secret.join("");  
+keyListener = new Object();
+keyListener.onKeyDown = function() {
+  x = Key.getAscii();
 
-    document.getElementById("lives").innerHTML = strikes;
+  document.getElementById("puzzleDiv").innerHTML = secret.join("");  
 
-    document.getElementById("wins").innerHTML = wins;
+  document.getElementById("lives").innerHTML = strikes;
 
-    document.getElementById("instructions").innerHTML = "Please Select A Letter";
+  document.getElementById("wins").innerHTML = wins;
 
-    document.getElementById("availLetters").innerHTML = available.join(" ");
-  }
+  document.getElementById("instructions").innerHTML = "Please Select A Letter";
+
+  document.getElementById("availLetters").innerHTML = available.join(" ")
+};
+// Key.addListener(keyListener);
 
 
 // // Other keys do nothing. Repeat key pushes of the same letter do nothing (don't count as strikes)
