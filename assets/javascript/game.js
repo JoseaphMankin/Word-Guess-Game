@@ -84,6 +84,7 @@ function checkFlag() {
                             document.getElementById("wins").innerHTML = wins;
                             document.getElementById("instructions").innerHTML = "YOU WIN! PLAY AGAIN?";
                             let isGameOver = true;
+                            
                             console.log(isGameOver);
                             //the game is over "flag". Let Game Over = False. Game over flips to True on end.
                             //run a function in the code if statement. Restarta dn set flag back 
@@ -95,7 +96,7 @@ function checkFlag() {
         }
     }
 }
-checkFlag();
+checkFlag()
 
     // while (strikes < 3 && secret.indexOf("_") >= 0) {
         // } else {
