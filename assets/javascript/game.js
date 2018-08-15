@@ -52,13 +52,13 @@ document.onkeyup = function initialize() {
 // Reset function to be called later after game ends
 
 function reset() {
-    let word = puzzles[Math.floor(Math.random() * puzzles.length)];
+    word = puzzles[Math.floor(Math.random() * puzzles.length)];
     console.log(word);
-    let strikes = 8;
-    let secret = [];
+    strikes = 8;
+    secret = [];
     console.log(secret);
-    let available = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-    let pickedLtrs = [];
+    available = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+    pickedLtrs = [];
 
     for (j = 0; j < word.length; j++) {
         secret.push("_ ");
@@ -69,7 +69,7 @@ function reset() {
     lives_span.innerHTML = strikes;
     instructions_span.innerHTML = "Please Select A Letter";
     availLetters_span.innerHTML = available.join(" ");
-    pickedLtrs_span = pickedLtrs.join(" ");
+    pickedLtrs_span.innerHTML = pickedLtrs.join(" ");
     play();
 }
 
@@ -125,6 +125,7 @@ function play() {
                     secret[i] = userGuess;
                     console.log(secret);
                     puzzle_div.innerHTML = secret.join("");
+                    
 
                     if (secret.indexOf("_ ") == -1) {
                         wins++;
