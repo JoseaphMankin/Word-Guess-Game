@@ -1,3 +1,12 @@
+//Cashing the DOM elements
+let puzzle_div = document.querySelector(".puzzleDiv");
+let lives_span = document.querySelector(".lives");
+let wins_p = document.querySelector(".wins");
+let instructions_span = document.querySelector(".instructions");
+let availLetters_span = document.querySelector(".availLetters");
+let pickedLtrs_span = document.querySelector(".pickedLtrs");
+
+
 // Index of puzzles, with the randomizer picking one. 
 let puzzles = ["DRACULA", "MUMMY", "WOLFMAN", "FRANKENSTEIN",];
 let word = puzzles[Math.floor(Math.random() * puzzles.length)];
@@ -19,18 +28,24 @@ console.log(secret);
 
 //Flag Variable to give the game a "state", for recursion.
 let isGameOver = false;
-console.log(isGameOver);
+
+//toggler function if I wanna explore trying to have a global state
+function toggler() {
+    isGameOver = !isGameOver;
+    return (isGameOver);
+    console.log(isGameOver);
+}
 
 //Initial load of scoreboard and message to press key coming from initial HTML
 
 document.onkeyup = function initialize() {
 
-    document.querySelector(".puzzleDiv").innerHTML = secret.join(" ");
-    document.querySelector(".lives").innerHTML = strikes;
-    document.querySelector(".wins").innerHTML = wins;
-    document.querySelector(".instructions").innerHTML = "Please Select A Letter";
-    document.querySelector(".availLetters").innerHTML = available.join(" ");
-    document.querySelector(".pickedLtrs").innerHTML = pickedLtrs.join(" ");
+    puzzle_div.innerHTML = secret.join(" ");
+    lives_span.innerHTML = strikes;
+    wins_p.innerHTML = wins;
+    instructions_span.innerHTML = "Please Select A Letter";
+    availLetters_span.innerHTML = available.join(" ");
+    pickedLtrs_span.innerHTML = pickedLtrs.join(" ");
     play();
 };
 
@@ -38,27 +53,34 @@ document.onkeyup = function initialize() {
 
 function reset() {
     let word = puzzles[Math.floor(Math.random() * puzzles.length)];
+    console.log(word);
     let strikes = 8;
     let secret = [];
+    console.log(secret);
     let available = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
     let pickedLtrs = [];
 
-    for (i = 0; i < word.length; i++) {
+    for (j = 0; j < word.length; j++) {
         secret.push("_ ");
     }
-    document.querySelector(".puzzleDiv").innerHTML = secret.join(" ");
-    document.querySelector(".lives").innerHTML = strikes;
-    document.querySelector(".instructions").innerHTML = "Please Select A Letter";
-    document.querySelector(".availLetters").innerHTML = available.join(" ");
-    document.querySelector(".pickedLtrs").innerHTML = pickedLtrs.join(" ");
+    console.log(j);
+
+    puzzle_div.innerHTML = secret.join(" ");
+    lives_span.innerHTML = strikes;
+    instructions_span.innerHTML = "Please Select A Letter";
+    availLetters_span.innerHTML = available.join(" ");
+    pickedLtrs_span = pickedLtrs.join(" ");
     play();
 }
-//toggler function if I wanna explore trying to have a global state
-function toggler() {
-    isGameOver = !isGameOver;
-    return (isGameOver);
-    console.log(isGameOver);
-}
+
+// //Function for building Picked Letters field
+// function guessedLtrs() {
+//     if ( userGuess == pickedLtrs.indexOf() ){
+//         alert("Please Pick a Letter"); 
+//     } else {
+//         pickedLtrs.push(userGuess);
+//     }    
+// }
 
 //Main Play Sequence
 
@@ -75,19 +97,17 @@ function play() {
             // adds the key pressed to the picked letter array
             pickedLtrs.push(userGuess);
             //then updates HTML page
-            document.querySelector(".availLetters").innerHTML = available.join(" ");
-            document.querySelector(".pickedLtrs").innerHTML = pickedLtrs.join(" ");
+            availLetters_span.innerHTML = available.join(" ");
+            pickedLtrs_span.innerHTML = pickedLtrs.join(" ");
         }
 
         //if the Guessed letter isn't an index of word, remove 1 from the strike pool. If hits Zero, you lose
 
         if (word.indexOf(userGuess) < 0) {
             strikes--;
-            console.log("Strike!");
-            console.log(strikes);
-            document.querySelector(".lives").innerHTML = strikes;
+            lives_span.innerHTML = strikes;
             if (strikes == 0) {
-                document.querySelector(".instructions").innerHTML = "YOU LOSE! PLAY AGAIN?";
+                instructions_span.innerHTML = "YOU LOSE! PLAY AGAIN?";
                 let playAgain = confirm("YOU LOSE. The Answer was " + word + "\n Do you want to play again?");
                 if (playAgain == true) {
                     reset();
@@ -104,11 +124,11 @@ function play() {
                 if (word[i] === userGuess) {
                     secret[i] = userGuess;
                     console.log(secret);
-                    document.querySelector(".puzzleDiv").innerHTML = secret.join("");
+                    puzzle_div.innerHTML = secret.join("");
 
-                    if (secret.indexOf("_ ") === -1) {
+                    if (secret.indexOf("_ ") == -1) {
                         wins++;
-                        document.querySelector(".wins").innerHTML = wins;
+                        wins_p.innerHTML = wins;
                         let playAgain = confirm("YOU WIN. The Answer was " + word + "\n Do you want to play again?");
                         if (playAgain == true) {
                             reset();
