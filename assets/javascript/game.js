@@ -31,12 +31,16 @@ document.onkeypress = function initialize() {
     document.querySelector(".wins").innerHTML = wins;
     document.querySelector(".instructions").innerHTML = "Please Select A Letter";
     document.querySelector(".availLetters").innerHTML = available.join(" ");
-    document.querySelector(".pickedLtrs").innerHTML = pickedLtrs.join(" ")
+    document.querySelector(".pickedLtrs").innerHTML = pickedLtrs.join(" ");
 };
+
 // Reset function to be called after game ends
 
 function reset(){
     let strikes = 8;
+    let secret = [];
+    let available = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+    let pickedLtrs = [];
     
     for (i = 0; i < word.length; i++) {
         secret.push("_ ");
@@ -45,7 +49,7 @@ function reset(){
     document.querySelector(".lives").innerHTML = strikes;
     document.querySelector(".instructions").innerHTML = "Please Select A Letter";
     document.querySelector(".availLetters").innerHTML = available.join(" ");
-    document.querySelector(".pickedLtrs").innerHTML = pickedLtrs.join(" ")
+    document.querySelector(".pickedLtrs").innerHTML = pickedLtrs.join(" ");
 
 }
 
@@ -59,19 +63,12 @@ function reset(){
             var i = available.indexOf(userGuess);
             if (i != -1) {
                 available.splice(i, 1);
-            }
-            //adds the key pressed to the picked letter array
-            // var j = pickedLtrs.indexOf(userGuess);
-            // if (j >= 0) {
-            //     alert("That letter's already been picked. Please pick another letter!");
-            // } else{
-            //     pickedLtrs.push(userGuess);
-            // }
-            
-            
-            console.log(available);
-            document.querySelector(".availLetters").innerHTML = available.join(" ");
-            document.querySelector(".pickedLtrs").innerHTML = pickedLtrs.join(" ");    
+                // adds the key pressed to the picked letter array
+                pickedLtrs.push(userGuess);
+                //then updates HTML page
+                document.querySelector(".availLetters").innerHTML = available.join(" ");
+                document.querySelector(".pickedLtrs").innerHTML = pickedLtrs.join(" ");  
+            } 
 
             //if the Guessed letter isn't an index of word, remove 1 from the strike pool. If hits Zero, you lose
 
