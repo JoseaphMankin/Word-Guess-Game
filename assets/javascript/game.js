@@ -24,27 +24,31 @@ console.log(secret);
 
 //Initial load of scoreboard and message to press key coming from initial HTML
 
-document.onkeypress = function () {
+document.onkeypress = function initialize() {
 
-    document.getElementById("puzzleDiv").innerHTML = secret.join("");
-
-    document.getElementById("lives").innerHTML = strikes;
-
-    document.getElementById("wins").innerHTML = wins;
-
-    document.getElementById("instructions").innerHTML = "Please Select A Letter";
-
-    document.getElementById("availLetters").innerHTML = available.join(" ");
-
-    document.getElementById("pickedLtrs").innerHTML = pickedLtrs.join(" ")
+    document.querySelector(".puzzleDiv").innerHTML = secret.join("");
+    document.querySelector(".lives").innerHTML = strikes;
+    document.querySelector(".wins").innerHTML = wins;
+    document.querySelector(".instructions").innerHTML = "Please Select A Letter";
+    document.querySelector(".availLetters").innerHTML = available.join(" ");
+    document.querySelector(".pickedLtrs").innerHTML = pickedLtrs.join(" ")
 };
-// Key.addListener(keyListener);
+// Reset function to be called after game ends
 
+function reset(){
+    let strikes = 8;
+    
+    for (i = 0; i < word.length; i++) {
+        secret.push("_ ");
+    }
+    document.querySelector(".puzzleDiv").innerHTML = secret.join("");
+    document.querySelector(".lives").innerHTML = strikes;
+    document.querySelector(".instructions").innerHTML = "Please Select A Letter";
+    document.querySelector(".availLetters").innerHTML = available.join(" ");
+    document.querySelector(".pickedLtrs").innerHTML = pickedLtrs.join(" ")
 
+}
 
-
-
-function checkFlag() {
     if (isGameOver == false) {
 
         //keyup listener to get letter and convert to uppercase for user error
@@ -57,17 +61,17 @@ function checkFlag() {
                 available.splice(i, 1);
             }
             //adds the key pressed to the picked letter array
-            var j = pickedLtrs.indexOf(userGuess);
-            if (j >= 0) {
-                alert("That letter's already been picked. Please pick another letter!")
-            } else{
-                pickedLtrs.push(userGuess);
-            }
+            // var j = pickedLtrs.indexOf(userGuess);
+            // if (j >= 0) {
+            //     alert("That letter's already been picked. Please pick another letter!");
+            // } else{
+            //     pickedLtrs.push(userGuess);
+            // }
             
             
             console.log(available);
-            document.getElementById("availLetters").innerHTML = available.join(" ");
-            document.getElementById("pickedLtrs").innerHTML = pickedLtrs.join(" ");    
+            document.querySelector(".availLetters").innerHTML = available.join(" ");
+            document.querySelector(".pickedLtrs").innerHTML = pickedLtrs.join(" ");    
 
             //if the Guessed letter isn't an index of word, remove 1 from the strike pool. If hits Zero, you lose
 
@@ -75,9 +79,9 @@ function checkFlag() {
                 strikes--;
                 console.log("Strike!");
                 console.log(strikes);
-                document.getElementById("lives").innerHTML = strikes;
+                document.querySelector(".lives").innerHTML = strikes;
                 if (strikes == 0) {
-                    document.getElementById("instructions").innerHTML = "YOU LOSE! PLAY AGAIN?";
+                    document.querySelector(".instructions").innerHTML = "YOU LOSE! PLAY AGAIN?";
                     let isGameOver = true;
                     console.log(isGameOver);
                 }
@@ -89,40 +93,45 @@ function checkFlag() {
                     if (word[i] === userGuess) {
                         secret[i] = userGuess;
                         console.log(secret);
-                        document.getElementById("puzzleDiv").innerHTML = secret.join("");
+                        document.querySelector(".puzzleDiv").innerHTML = secret.join("");
 
                         if (secret.indexOf("_ ") === -1) {
                             wins++;
-                            document.getElementById("wins").innerHTML = wins;
-                            document.getElementById("instructions").innerHTML = "YOU WIN! PLAY AGAIN?";
-                            let isGameOver = true;
+                            document.querySelector(".wins").innerHTML = wins;
+                            let playAgain = confirm("The Answer was " + word + "\n Do you want to play again?");
+                            if (playAgain == true){
+                                let isGameOver = false;
+                                reset();
+                            } else{
+                                alert("No problem. Have a nice day!");
+                            }
+                            }   
                             
                             console.log(isGameOver);
                             //the game is over "flag". Let Game Over = False. Game over flips to True on end.
                             //run a function in the code if statement. Restarta dn set flag back 
                         }
+                        // if (isGameOver == True){
+                        //     alert("Game Over!");
+                        
+                        // }
 
                     }
                 }
             }
+        } else {
+            alert("We done")
         }
-    }
-}
-checkFlag()
 
-    // while (strikes < 3 && secret.indexOf("_") >= 0) {
-        // } else {
-        // alert("Congratulations on your win!");
-        // }
-        // alert("The secret word was " + word);
 
-// document.getElementById("puzzleDiv").innerHTML = secret; 
+   
+
+
+// document.querySelector("puzzleDiv").innerHTML = secret; 
 
 
 
 
 
 // // Other keys do nothing. Repeat key pushes of the same letter do nothing (don't count as strikes)
-
-// //Option to play again, staring over, Resetting Guesses to 8, but leaving wins alone.
 

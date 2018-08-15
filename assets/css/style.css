@@ -12,7 +12,7 @@ div{
     padding: 3px;
 }
 
-#puzzleDiv{
+.puzzleDiv{
     background-color: red;
     color: black;
     border: 3px solid white;
@@ -22,7 +22,7 @@ div{
     font-size: 60px;
 }
 
-#dashboard{
+.dashboard{
     border: 5px solid green;
     padding: 0px;
     margin: 0px;
