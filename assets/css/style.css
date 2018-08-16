@@ -1,33 +1,40 @@
+@import url('https://fonts.googleapis.com/css?family=Butcherman');
+
 body{
-    background-color: black;
-    color: red;
     text-align: center;
+    background-size:cover;
+}
+
+h1{
+    font-family: 'Butcherman', cursive;
+    font-size: 75pt;
+    color: red;
+    letter-spacing: 15px;
 }
 
 hr{
-    border-color: red;
+    border-color: black;
 }
 
-div{
-    padding: 3px;
-}
 
 .puzzleDiv{
-    background-image: url("../images/spookytrees.jpg");
-    background-size:cover;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: yellow;
     border: 3px solid white;
-    height: 300px;
-    padding: 20px;
+    height: 250px;
     width: 100%;
-    font-size: 60px;
-    letter-spacing: 2px;
+    font-size: 80px;
+    background-color: rgba(124, 8, 8, 0.4);
+    word-wrap: break-word;
 }
 
 .dashboard{
-    border: 5px solid green;
-    padding: 0px;
+    color: white;
+    border: 3px solid white;
+    padding: 10px;
     margin: 0px;
+    background-color: rgba(255, 0, 0, 0.7);
+   
 }
 
 .innerDiv{
@@ -36,8 +43,23 @@ div{
 }
 
 .letters{
-    border: 2px solid yellow;
     height: 200px;
     font-size: 16pt;
-
 }
+
+.instructions{
+    font-size: 25px;
+}
+
+input{
+    background-color: yellow;
+    color: black;
+    padding: 10px;
+}
+
+input:hover { 
+    background-color: red;
+    color: white;
+    transition: .5s;
+}
+
