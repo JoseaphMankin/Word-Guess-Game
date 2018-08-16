@@ -13,13 +13,15 @@ div{
 }
 
 .puzzleDiv{
-    background-color: red;
-    color: black;
+    background-image: url("../images/spookytrees.jpg");
+    background-size:cover;
+    color: yellow;
     border: 3px solid white;
-    height: 200px;
-    padding: 10px;
+    height: 300px;
+    padding: 20px;
     width: 100%;
     font-size: 60px;
+    letter-spacing: 2px;
 }
 
 .dashboard{
