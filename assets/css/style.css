@@ -2,12 +2,13 @@
 
 body{
     text-align: center;
+    background-image: URL("../images/spookytrees.jpg");
     background-size:cover;
 }
 
 h1{
     font-family: 'Butcherman', cursive;
-    font-size: 75pt;
+    font-size: 70pt;
     color: red;
     letter-spacing: 15px;
 }
@@ -26,6 +27,7 @@ hr{
     font-size: 80px;
     background-color: rgba(124, 8, 8, 0.4);
     word-wrap: break-word;
+    white-space: nowrap;
 }
 
 .dashboard{
