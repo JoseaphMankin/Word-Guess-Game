@@ -1,4 +1,4 @@
-//Cashing the DOM elements
+//Cashing the DOM elements - Log of references for later innerHTML updates
 let puzzle_div = document.querySelector(".puzzleDiv");
 let lives_span = document.querySelector(".lives");
 let wins_p = document.querySelector(".wins");
@@ -48,7 +48,6 @@ document.onkeyup = function initialize() {
     instructions_span.innerHTML = ('<input id="resetButton" type="button" value="PLEASE TYPE A LETTER!" onclick="reset();" />');
     availLetters_span.innerHTML = available.join(" ");
     pickedLtrs_span.innerHTML = pickedLtrs.join(" ");
-    // despacer();
     play();
     rain_audio.play();
 };
@@ -80,22 +79,11 @@ function reset() {
     instructions_span.innerHTML = ('<input id="resetButton" type="button" value="PLEASE TYPE A LETTER!" onclick="reset();" />');
     availLetters_span.innerHTML = available.join(" ");
     pickedLtrs_span.innerHTML = pickedLtrs.join(" ");
-    // despacer();
     play();
     rain_audio.play();
 }
-//If Functions for only allowing letters from "Available" Array  
 
-
-if (pickedLtrs.includes(userGuess)){
-    pickedLtrs.push(userGuess);
-  }
-
-// function checkPicked(userGuess, pickedLtrs) {
-//     return pickedLtrs.indexOf(userGuess) === -1;
-// }
-
-//Main Play Sequence
+//Main Play Sequence function. 
 
 function play() {
 
@@ -156,4 +144,13 @@ function play() {
     }
 }
 
+//DISREGARD - Scrapyard of other ideas I'd implement with more time
 
+
+// if (pickedLtrs.includes(userGuess)){
+//     pickedLtrs.push(userGuess);
+//   }
+
+// function checkPicked(userGuess, pickedLtrs) {
+//     return pickedLtrs.indexOf(userGuess) === -1;
+// }
