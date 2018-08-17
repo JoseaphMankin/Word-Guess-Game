@@ -117,7 +117,6 @@ function play() {
             pickedLtrs_span.innerHTML = pickedLtrs.join(" ");
         }
 
-
         //if the Guessed letter isn't an index of word, remove 1 from the strike pool. If hits Zero, you lose
 
         if (word.indexOf(userGuess) < 0 && isGameOver == false) {
@@ -159,32 +158,9 @@ function play() {
 
                     }
                 }
-
             }
-
         }
     }
 }
 
-
-// // Other keys do nothing. Repeat key pushes of the same letter do nothing (don't count as strikes)
-
-//toggler function if I wanna explore trying to have a global state
-// function toggler() {
-//     isGameOver = !isGameOver;
-//     return (isGameOver);
-//     console.log(isGameOver);
-// }
-
-//function to clear out any spaces the puzzles may have
-
-// function despacer() {
-//     let space = " ";
-//     for (i = 0; i < word.length; i++) {
-//         if (word[i] === space) {
-//             secret[i] = space;
-//             puzzle_div.innerHTML = secret.join(" ");
-//         }
-//     }
-// }
 
