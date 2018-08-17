@@ -27,7 +27,8 @@ hr{
     font-size: 80px;
     background-color: rgba(124, 8, 8, 0.4);
     word-wrap: break-word;
-    white-space: nowrap;
+    letter-spacing: 3px;
+
 }
 
 .dashboard{
