@@ -11,55 +11,34 @@ let haunting_audio = document.getElementById('haunting');
 
 
 // Index of puzzles, with the randomizer picking one. 
-let puzzles = ["DRACULA", "MUMMY", "WOLFMAN", "FRANKENSTEIN"];
+let puzzles = ["DRACULA", "THE MUMMY", "THE WOLFMAN", "FRANKENSTEIN", "THE BLOB", "JASON VORHEES", "FREDDY KRUEGER",];
 let word = puzzles[Math.floor(Math.random() * puzzles.length)];
 
 // An Array to hold the puzzle blanks/letters and one to hold all the available guesses
 let secret = [];
 let available = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", " "];
 let pickedLtrs = [];
-// let wordDisplay = "";
 
 // Varibles to count the guesses and wins
 let strikes = 8;
 let wins = 0;
 
 // Taking the length of the secret word, and pushing placeholder _'s it into the secret array
+// Also, if the chosen word has a space in it, replacing the space with a " - "
 for (i = 0; i < word.length; i++) {
     console.log(word[i]);
-    if (word[i] === " ") {
+    if (word[i] == " ") {
         secret.push(" - ");
         console.log(secret);
     } else {
-
         secret.push("_ ");
     }
 }
-// console.log(secret);
 
-//Flag Variable to give the game a "state", for recursion.
+//Global "Flag" Variable to give the game a "state", for recursion. Thanks Joe for the heads up on this!!
 let isGameOver = false;
 
-//toggler function if I wanna explore trying to have a global state
-function toggler() {
-    isGameOver = !isGameOver;
-    return (isGameOver);
-    console.log(isGameOver);
-}
-
-//function to clear out any spaces the puzzles may have
-
-function despacer() {
-    let space = " ";
-    for (i = 0; i < word.length; i++) {
-        if (word[i] === space) {
-            secret[i] = space;
-            puzzle_div.innerHTML = secret.join(" ");
-        }
-    }
-}
-
-//Initial load of scoreboard and message to press key coming from initial HTML
+//Initial load of scoreboard. "Press any key" coming from initial HTML
 
 document.onkeyup = function initialize() {
 
@@ -74,7 +53,8 @@ document.onkeyup = function initialize() {
     rain_audio.play();
 };
 
-// Reset function to be called later after game ends
+// Reset function to be called for every subsequent play later after game ends.
+// NOTE that wins is not reset by this, so you can keep track of wins through multiple plays.
 
 function reset() {
     isGameOver = false;
@@ -86,11 +66,15 @@ function reset() {
     available = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
     pickedLtrs = [];
 
-    for (j = 0; j < word.length; j++) {
-        secret.push("_ ");
+    for (i = 0; i < word.length; i++) {
+        console.log(word[i]);
+        if (word[i] == " ") {
+            secret.push(" - ");
+            console.log(secret);
+        } else {
+            secret.push("_ ");
+        }
     }
-    console.log(j);
-
     puzzle_div.innerHTML = secret.join(" ");
     lives_span.innerHTML = strikes;
     instructions_span.innerHTML = ('<input id="resetButton" type="button" value="PLEASE TYPE A LETTER!" onclick="reset();" />');
@@ -102,9 +86,14 @@ function reset() {
 }
 //If Functions for only allowing letters from "Available" Array  
 
-function checkPicked(userGuess, pickedLtrs) {
-    return pickedLtrs.indexOf(userGuess) === -1;
-}
+
+if (pickedLtrs.includes(userGuess)){
+    pickedLtrs.push(userGuess);
+  }
+
+// function checkPicked(userGuess, pickedLtrs) {
+//     return pickedLtrs.indexOf(userGuess) === -1;
+// }
 
 //Main Play Sequence
 
@@ -113,7 +102,7 @@ function play() {
     //keyup listener to get letter and convert to uppercase for user error
     document.onkeyup = function () {
         let userGuess = String.fromCharCode(event.keyCode).toUpperCase();
-
+        let pickedLetterSpan = document.getElementsByClassName("pickedLtrs")[0].innerText;
         // wordDisplay = wordDisplay.toUpperCase() + e.key.toUpperCase();
 
 
@@ -132,7 +121,12 @@ function play() {
         //if the Guessed letter isn't an index of word, remove 1 from the strike pool. If hits Zero, you lose
 
         if (word.indexOf(userGuess) < 0 && isGameOver == false) {
-            strikes--;
+            if (pickedLetterSpan.length === 0) {
+                strikes--;
+            }
+            if (pickedLetterSpan.length > 0 && pickedLetterSpan.indexOf(userGuess) === -1) {
+                strikes--;
+            }
             console.log(pickedLtrs.indexOf(userGuess), pickedLtrs, userGuess)
             // if (!available.indexOf(userGuess) == -1){    
             // strikes--;
@@ -174,4 +168,23 @@ function play() {
 
 
 // // Other keys do nothing. Repeat key pushes of the same letter do nothing (don't count as strikes)
+
+//toggler function if I wanna explore trying to have a global state
+// function toggler() {
+//     isGameOver = !isGameOver;
+//     return (isGameOver);
+//     console.log(isGameOver);
+// }
+
+//function to clear out any spaces the puzzles may have
+
+// function despacer() {
+//     let space = " ";
+//     for (i = 0; i < word.length; i++) {
+//         if (word[i] === space) {
+//             secret[i] = space;
+//             puzzle_div.innerHTML = secret.join(" ");
+//         }
+//     }
+// }
 
