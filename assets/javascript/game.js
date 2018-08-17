@@ -103,8 +103,6 @@ function play() {
     document.onkeyup = function () {
         let userGuess = String.fromCharCode(event.keyCode).toUpperCase();
         let pickedLetterSpan = document.getElementsByClassName("pickedLtrs")[0].innerText;
-        // wordDisplay = wordDisplay.toUpperCase() + e.key.toUpperCase();
-
 
         //removes the key pressed from the available array
         var i = available.indexOf(userGuess);
@@ -112,12 +110,13 @@ function play() {
             available.splice(i, 1);
             // adds the key pressed to the picked letter array
             pickedLtrs.push(userGuess);
-            //then updates HTML page
+            //then updates both HTML page
             availLetters_span.innerHTML = available.join(" ");
             pickedLtrs_span.innerHTML = pickedLtrs.join(" ");
         }
 
-        //if the Guessed letter isn't an index of word, remove 1 from the strike pool. If hits Zero, you lose
+        //if the Guessed letter isn't an index of word, remove 1 from the strike pool. 
+        //If hits Zero, you lose. Also added some gates to prevent multiple presses of a wrong letter only counting as 1 strike
 
         if (word.indexOf(userGuess) < 0 && isGameOver == false) {
             if (pickedLetterSpan.length === 0) {
@@ -126,13 +125,9 @@ function play() {
             if (pickedLetterSpan.length > 0 && pickedLetterSpan.indexOf(userGuess) === -1) {
                 strikes--;
             }
-            console.log(pickedLtrs.indexOf(userGuess), pickedLtrs, userGuess)
-            // if (!available.indexOf(userGuess) == -1){    
-            // strikes--;
-            // }
+        //Final losing condition and Reset button to play again. Global isGameOver flipped to TRUE
             lives_span.innerHTML = strikes;
             if (strikes == 0) {
-                // instructions_span.innerHTML = "YOU LOSE! PLAY AGAIN?";
                 instructions_span.innerHTML = ('<input id="resetButton" type="button" value="YOU LOSE! CLICK HERE TO PLAY AGAIN!" onclick="reset();" />');
                 puzzle_div.innerHTML = word;
                 laugh_audio.play();
@@ -140,15 +135,13 @@ function play() {
             }
         }
 
-        // If the letter exists in the word, add it to the good guesses array. If no more _ in array, you win.
+        // If the letter exists in the word, add it to the Secret array.
         else {
             for (i = 0; i < word.length; i++) {
-                // Each time the guess letter is found, add it as a good guess in the same spot
                 if (word[i] === userGuess) {
                     secret[i] = userGuess;
-                    // console.log(secret);
                     puzzle_div.innerHTML = secret.join("");
-
+        //Final Win Condition. Reset button to play again and Global isGameOver set to True
                     if (secret.indexOf("_ ") == -1 && isGameOver == false) {
                         wins++;
                         wins_p.innerHTML = wins;
