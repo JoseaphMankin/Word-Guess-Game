@@ -68,7 +68,7 @@ function reset() {
     for (i = 0; i < word.length; i++) {
         console.log(word[i]);
         if (word[i] == " ") {
-            secret.push(" - ");
+            secret.push("&nbsp");
             console.log(secret);
         } else {
             secret.push("_ ");
